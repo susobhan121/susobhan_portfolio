@@ -37,6 +37,37 @@
             text-align: center;
             position: relative;
             overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .profile-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid transparent;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            padding: 5px;
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-photo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        .profile-photo img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
         }
 
         .header::before {
@@ -53,6 +84,11 @@
         @keyframes shimmer {
             0% { left: -100%; }
             100% { left: 100%; }
+        }
+
+        .profile-info {
+            flex: 1;
+            min-width: 300px;
         }
 
         .profile-info h1 {
@@ -349,6 +385,16 @@
 
         /* Responsive */
         @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .profile-photo {
+                width: 150px;
+                height: 150px;
+            }
+            
             .profile-info h1 {
                 font-size: 2.2em;
             }
@@ -384,6 +430,9 @@
     <div class="container">
         <!-- Header -->
         <header class="header">
+            <div class="profile-photo">
+                <img src="su.jpg" alt="Susobhan Pratihar">
+            </div>
             <div class="profile-info">
                 <h1>Susobhan Pratihar</h1>
                 <div class="title">Computer Science & Data Processing</div>
