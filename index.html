@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Susobhan Pratihar - Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .profile-info h1 {
+            font-size: 3em;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-info .title {
+            font-size: 1.3em;
+            color: #666;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .profile-info .student-id {
+            font-size: 1.1em;
+            color: #888;
+            font-weight: 300;
+        }
+
+        /* Navigation */
+        .nav {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+        }
+
+        .nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav a:hover {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Sections */
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .section:nth-child(2) { animation-delay: 0.1s; }
+        .section:nth-child(3) { animation-delay: 0.2s; }
+        .section:nth-child(4) { animation-delay: 0.3s; }
+        .section:nth-child(5) { animation-delay: 0.4s; }
+        .section:nth-child(6) { animation-delay: 0.5s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section h2 {
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        /* Education Table */
+        .education-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .education-table th,
+        .education-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .education-table th {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .education-table tr:hover {
+            background: rgba(102, 126, 234, 0.05);
+            transform: scale(1.01);
+            transition: all 0.3s ease;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .skill-category {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.2);
+        }
+
+        .skill-category h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-tag {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Projects */
+        .project {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            border-left: 5px solid #667eea;
+            transition: all 0.3s ease;
+        }
+
+        .project:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.15);
+        }
+
+        .project h3 {
+            color: #667eea;
+            font-size: 1.4em;
+            margin-bottom: 10px;
+        }
+
+        .project .project-meta {
+            color: #888;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .project ul {
+            margin-left: 20px;
+        }
+
+        .project li {
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        /* Achievements */
+        .achievement {
+            background: linear-gradient(135deg, rgba(255, 193, 7, 0.1), rgba(255, 152, 0, 0.1));
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 0 15px 15px 0;
+            transition: all 0.3s ease;
+        }
+
+        .achievement:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 15px rgba(255, 193, 7, 0.2);
+        }
+
+        .achievement strong {
+            color: #e65100;
+        }
+
+        /* Contact */
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .contact-item {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.2);
+        }
+
+        .contact-item i {
+            font-size: 2em;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+        }
+
+        .contact-item h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin-top: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .profile-info h1 {
+                font-size: 2.2em;
+            }
+            
+            .nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .section {
+                padding: 25px;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="profile-info">
+                <h1>Susobhan Pratihar</h1>
+                <div class="title">Computer Science & Data Processing</div>
+                <div class="student-id">23MA60R12 | IIT Kharagpur</div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav">
+            <ul>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#achievements">Achievements</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+
+        <!-- Education Section -->
+        <section id="education" class="section">
+            <h2><i class="fas fa-graduation-cap"></i> Education</h2>
+            <table class="education-table">
+                <thead>
+                    <tr>
+                        <th>Year</th>
+                        <th>Degree/Exam</th>
+                        <th>Institute</th>
+                        <th>CGPA/Marks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2025</td>
+                        <td>M.TECH</td>
+                        <td>IIT Kharagpur</td>
+                        <td>8.67 / 10</td>
+                    </tr>
+                    <tr>
+                        <td>2021</td>
+                        <td>M.Sc. (Applied Mathematics)</td>
+                        <td>Vidyasagar University</td>
+                        <td>7.92 / 10</td>
+                    </tr>
+                    <tr>
+                        <td>2019</td>
+                        <td>B.Sc. (Mathematics)</td>
+                        <td>Vidyasagar University</td>
+                        <td>61.87%</td>
+                    </tr>
+                    <tr>
+                        <td>2016</td>
+                        <td>Higher Secondary</td>
+                        <td>WBCHSE</td>
+                        <td>81.40%</td>
+                    </tr>
+                    <tr>
+                        <td>2014</td>
+                        <td>Secondary</td>
+                        <td>WBBSE</td>
+                        <td>67.71%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="section">
+            <h2><i class="fas fa-code"></i> Skills & Expertise</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Programming Languages</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">C++</span>
+                        <span class="skill-tag">C</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">MySQL</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Core Skills</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Data Structures</span>
+                        <span class="skill-tag">Algorithms</span>
+                        <span class="skill-tag">Machine Learning</span>
+                        <span class="skill-tag">Data Analysis</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Libraries & Tools</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">NumPy</span>
+                        <span class="skill-tag">Pandas</span>
+                        <span class="skill-tag">Matplotlib</span>
+                        <span class="skill-tag">Seaborn</span>
+                        <span class="skill-tag">scikit-learn</span>
+                        <span class="skill-tag">MS Office</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Coursework</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">AI & ML</span>
+                        <span class="skill-tag">Database Systems</span>
+                        <span class="skill-tag">Operating Systems</span>
+                        <span class="skill-tag">Graph Theory</span>
+                        <span class="skill-tag">Statistics</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="section">
+            <h2><i class="fas fa-project-diagram"></i> Projects</h2>
+            
+            <div class="project">
+                <h3>Hate Speech Detection Using NLP and LSTM</h3>
+                <div class="project-meta">M.Tech Project | Aug 2024 - Nov 2024 | Guide: Prof. Debjani Chakraborty</div>
+                <ul>
+                    <li>Developed an automated system leveraging Natural Language Processing (NLP) and Long Short-Term Memory (LSTM) networks to classify tweets as hate speech or non-hate speech</li>
+                    <li>Designed a multi-layered LSTM model with embedding, dropout, and dense layers to efficiently process text data and mitigate overfitting</li>
+                    <li>Achieved a training accuracy of 98.38% and validation accuracy of 97.08%</li>
+                </ul>
+            </div>
+
+            <div class="project">
+                <h3>Salary Prediction Using Linear Regression</h3>
+                <div class="project-meta">M.Tech Project | Aug 2023 - Nov 2023 | Guide: Prof. Buddhananda Banerjee</div>
+                <ul>
+                    <li>Contributed to the 4-member team project, collected data about salaries of different kinds of employees from various websites and journals</li>
+                    <li>Identified key features impacting salary through exploratory data analysis</li>
+                    <li>Applied simple and multiple linear regression models to establish a baseline for salary prediction using machine learning techniques</li>
+                </ul>
+            </div>
+
+            <div class="project">
+                <h3>Google's PageRank Algorithm</h3>
+                <div class="project-meta">M.Tech Seminar | Aug 2023 - Nov 2023</div>
+                <ul>
+                    <li>Presented a seminar on Google's PageRank Algorithm as a coursework in first semester</li>
+                    <li>Explained how PageRank algorithm works and discussed the drawbacks of the first algorithm</li>
+                    <li>Explained Random Surfer Model and discussed applications of PageRank algorithm in real life</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="section">
+            <h2><i class="fas fa-briefcase"></i> Experience</h2>
+            
+            <div class="project">
+                <h3>ML Intern - Feynn Labs Services</h3>
+                <div class="project-meta">June 2024 - Aug 2024</div>
+                <p><strong>Segmentation Analysis of Global and Indian EV Markets</strong></p>
+                <ul>
+                    <li>Conducted comprehensive analysis of Indian Electric Vehicle (EV) markets</li>
+                    <li>Applied K-means clustering to refine market segmentation, resulting in precise customer groups</li>
+                </ul>
+            </div>
+
+            <div class="project">
+                <h3>Teaching Assistant - IIT Kharagpur</h3>
+                <div class="project-meta">Aug 2024 - Nov 2024</div>
+                <ul>
+                    <li>Guided and mentored over 40 students within the Non Linear Programming Laboratory</li>
+                    <li>Fostered an environment of collaborative learning and academic excellence</li>
+                </ul>
+            </div>
+
+            <div class="project">
+                <h3>Subject Matter Expert - Chegg</h3>
+                <div class="project-meta">Freelancer</div>
+                <ul>
+                    <li>Providing expert solutions and guidance in mathematics and computer science topics</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Achievements Section -->
+        <section id="achievements" class="section">
+            <h2><i class="fas fa-trophy"></i> Awards & Achievements</h2>
+            
+            <div class="achievement">
+                <strong>GATE Mathematics 2023:</strong> Secured AIR 81 (Top 0.65% amongst over 12,463 candidates)
+            </div>
+            
+            <div class="achievement">
+                <strong>CSIR NET JRF Mathematics June-2022:</strong> Secured AIR 126 (Top 0.4% amongst over 30,942 candidates)
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <h2><i class="fas fa-envelope"></i> Get In Touch</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-user"></i>
+                    <h3>Profile</h3>
+                    <p>M.Tech Student specializing in Computer Science and Data Processing with expertise in Machine Learning and Data Analysis</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Location</h3>
+                    <p>IIT Kharagpur<br>West Bengal, India</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-heart"></i>
+                    <h3>Interests</h3>
+                    <p>Mystery novels, Poetry writing, Sports (Cricket, Football, Badminton, Chess), Urban gardening</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2025 Susobhan Pratihar. All rights reserved.</p>
+            <p>Designed with passion for technology and innovation</p>
+        </footer>
+    </div>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections for scroll animations
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Add parallax effect to header
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const header = document.querySelector('.header');
+            if (header) {
+                header.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+
+        // Add typing effect to title
+        const title = document.querySelector('.profile-info h1');
+        if (title) {
+            const text = title.textContent;
+            title.textContent = '';
+            let i = 0;
+            
+            setTimeout(() => {
+                const typeInterval = setInterval(() => {
+                    title.textContent += text[i];
+                    i++;
+                    if (i >= text.length) {
+                        clearInterval(typeInterval);
+                    }
+                }, 100);
+            }, 500);
+        }
+    </script>
+</body>
+</html>
